@@ -8,7 +8,9 @@
     "@ensdomains/dnssec-oracle": "^0.1.2",
     "@ensdomains/ens": "^0.3.11",
     "@ensdomains/resolver": "^0.1.9",
+    "@universal-login/contracts": "^0.3.18",
     "ethereum-waffle": "^2.0.15",
+    "ethers": "^4.0.33",
     "openzeppelin-solidity": "^2.3.0"
   },
   "devDependencies": {
