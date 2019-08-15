@@ -6,10 +6,11 @@ contract ProxyCounterfactualFactory is Ownable {
     using ECDSA for bytes32;
 
     bytes public initCode;
-    address public constant linkdropFactory = 0xBa051891B752ecE3670671812486fe8dd34CC1c8;
+    address public linkdropFactory;
 
-    constructor(bytes memory _initCode) public {
+    constructor(bytes memory _initCode, address _linkdropFactory) public {
         initCode = _initCode;
+        linkdropFactory = _linkdropFactory;
     }
 
     function createContract(address publicKey, bytes memory initializeWithENS, bytes memory signature) public returns(bool success) {

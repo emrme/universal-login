@@ -2,5 +2,21 @@
   "name": "contracts",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@ensdomains/buffer": "^0.0.10",
+    "@ensdomains/dnssec-oracle": "^0.1.2",
+    "@ensdomains/ens": "^0.3.11",
+    "@ensdomains/resolver": "^0.1.9",
+    "ethereum-waffle": "^2.0.15",
+    "openzeppelin-solidity": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5"
+  }
 }
