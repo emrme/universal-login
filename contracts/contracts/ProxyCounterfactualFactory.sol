@@ -6,15 +6,13 @@ contract ProxyCounterfactualFactory is Ownable {
     using ECDSA for bytes32;
 
     bytes public initCode;
-    address public linkdropFactory;
 
-    constructor(bytes memory _initCode, address _linkdropFactory) public {
+    constructor(bytes memory _initCode) public {
         initCode = _initCode;
-        linkdropFactory = _linkdropFactory;
     }
 
     function createContract(address publicKey, bytes memory initializeWithENS, bytes memory signature) public returns(bool success) {
-        require(isOwner() || msg.sender == linkdropFactory, "ONLY_OWNER_OR_LINKDROP_FACTORY");
+        require(isOwner() || msg.sender == address(this), "ONLY_OWNER_OR_SELF");
 
         require(publicKey == getSigner(initializeWithENS, signature), "Invalid signature");
         bytes32 finalSalt = keccak256(abi.encodePacked(publicKey));

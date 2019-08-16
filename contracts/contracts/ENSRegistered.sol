@@ -13,7 +13,7 @@ contract ENSRegistered {
         registrar.register(_hashLabel, address(this));
         ens.setResolver(_node, address(resolver));
         resolver.setAddr(_node, address(this));
-        ReverseRegistrar reverseRegistrar = ReverseRegistrar(ens.owner(ADDR_REVERSE_NODE));
-        reverseRegistrar.setName(_name);
+        // ReverseRegistrar reverseRegistrar = ReverseRegistrar(ens.owner(ADDR_REVERSE_NODE));
+        // reverseRegistrar.setName(_name);
     }
 }
