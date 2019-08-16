@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import ProxyCounterfactualFactory from '../build/ProxyCounterfactualFactory.json'
+import WalletFactory from '../build/WalletFactory.json'
 import ProxyContract from '../build/Proxy.json'
 import config from '../config.json'
 import { getDeployData } from '@universal-login/contracts'
@@ -15,10 +15,11 @@ const deploy = async () => {
 
   const walletMasterCopy = config.WALLET_MASTERCOPY
   const linkdropFactory = config.LINKDROP_FACTORY
+  const relayerAddress = config.RELAYER_ADDRESS
 
   const factory = new ethers.ContractFactory(
-    ProxyCounterfactualFactory.abi,
-    ProxyCounterfactualFactory.bytecode,
+    WalletFactory.abi,
+    WalletFactory.bytecode,
     deployer
   )
 
@@ -26,10 +27,15 @@ const deploy = async () => {
 
   const initData = getDeployData(ProxyContract, [walletMasterCopy, '0x0'])
 
-  const walletFactory = await factory.deploy(initData, linkdropFactory, {
-    gasLimit: 4500000,
-    gasPrice: ethers.utils.parseUnits(config.GAS_PRICE, 'gwei')
-  })
+  const walletFactory = await factory.deploy(
+    initData,
+    linkdropFactory,
+    relayerAddress,
+    {
+      gasLimit: 4500000,
+      gasPrice: ethers.utils.parseUnits(config.GAS_PRICE, 'gwei')
+    }
+  )
 
   await walletFactory.deployed()
 
