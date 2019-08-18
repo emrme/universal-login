@@ -32,7 +32,6 @@ const deploy = async () => {
     linkdropFactory,
     relayerAddress,
     {
-      gasLimit: 4500000,
       gasPrice: ethers.utils.parseUnits(config.GAS_PRICE, 'gwei')
     }
   )

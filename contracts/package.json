@@ -3,15 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "deploy-mastercopy": "npx babel-node ./scripts/deployMastercopy",
+    "deploy-factory": "npx babel-node ./scripts/deployFactory",
+    "connect-factory": "npx babel-node ./scripts/connectFactory"
+  },
   "dependencies": {
     "@ensdomains/buffer": "^0.0.10",
     "@ensdomains/dnssec-oracle": "^0.1.2",
     "@ensdomains/ens": "^0.3.11",
     "@ensdomains/resolver": "^0.1.9",
+    "@linkdrop/sdk": "^1.0.30",
     "@universal-login/contracts": "^0.3.18",
+    "csvtojson": "^2.0.10",
     "ethereum-waffle": "^2.0.15",
     "ethers": "^4.0.33",
-    "openzeppelin-solidity": "^2.3.0"
+    "openzeppelin-solidity": "^2.3.0",
+    "query-string": "^6.8.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -19,6 +27,7 @@
     "@babel/node": "^7.5.5",
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.5.5",
-    "@babel/register": "^7.5.5"
+    "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5"
   }
 }

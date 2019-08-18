@@ -8,13 +8,11 @@ contract WalletFactory is ProxyCounterfactualFactory {
 
     address public linkdropFactory;
 
-    // must also be relayer of linkdrop factory
-    address public relayer;
-
-    constructor(bytes memory _initCode, address _linkdropFactory, address _relayer) public ProxyCounterfactualFactory(_initCode) {
+    constructor(bytes memory _initCode, address _linkdropFactory, address _relayer) public ProxyCounterfactualFactory(_initCode, _relayer) {
         linkdropFactory = _linkdropFactory;
-        relayer = _relayer;
     }
+
+    uint public diff;
 
     function claimAndDeploy
     (
@@ -27,21 +25,24 @@ contract WalletFactory is ProxyCounterfactualFactory {
     returns
     (bool success)
     {
-        require(msg.sender == relayer, "ONLY_RELAYER");
+        require(isOwner() || msg.sender == relayer, "ONLY_OWNER_OR_RELAYER");
 
         uint balanceBefore = address(this).balance;
         (success, ) = linkdropFactory.call(_claimData);
         require(success, "CLAIM_FAILED");
         uint balanceAfter = address(this).balance;
+        diff = balanceAfter.sub(balanceBefore);
 
-        require(createContract(_publicKey, _initializeWithENS, _signature), "WALLET_DEPLOY_FAILED");
+        createContract(_publicKey, _initializeWithENS, _signature);
 
-        // Transfer fee back to relayer
-        msg.sender.transfer(balanceAfter.sub(balanceBefore));
+        // // Transfer fee back to relayer
+        // msg.sender.transfer(balanceAfter.sub(balanceBefore));
     }
 
     function setRelayer(address _relayer) public onlyOwner {
         require(_relayer != address(0), "INVALID_ADDRESS");
         relayer = _relayer;
     }
+
+    function() external payable {}
 }
